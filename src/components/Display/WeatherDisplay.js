@@ -1,70 +1,15 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Divider from '@material-ui/core/Divider';
 import WeatherIcon from '../Icon/WeatherIcon';
 import water from '../../assets/water.svg';
 import wind from '../../assets/wind.svg';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    padding: 0,
-    margin: 0,
-    width: '100%',
-    height: '100%',
-    fontSize: '.95rem',
-  },
-  topBar: {
-    marginTop: 9,
-    padding: '0 30px',
-  },
-  divider: {
-    margin: 'auto',
-    width: '98%',
-    backgroundColor: 'rgba(0, 0, 0, 0.23)',
-  },
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    paddingLeft: '10px',
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  mainDivider: {
-    margin: '20px auto',
-    width: '99%',
-    backgroundColor: 'rgba(0, 0, 0, 0.23)',
-  },
-  temp: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingRight: '10px',
-  },
-  iconContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    paddingBottom: 20,
-  },
-  icon: {
-    width: 50,
-    height: 50,
-  },
-  buttonBold: {
-    fontWeight: '600',
-  },
-}));
+import classes from './WeatherDisplay.module.css';
 
 function WeatherDisplay() {
-  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Paper>
@@ -74,8 +19,8 @@ function WeatherDisplay() {
           </Grid>
           <Grid item xs={4} align='right' className={classes.topRightBar}>
             <ButtonGroup variant='text' aria-label='text primary button group'>
-              <Button className={classes.buttonBold}>C°</Button>
-              <Button className={classes.buttonBold}>F°</Button>
+              <Button className={classes.bold}>C°</Button>
+              <Button className={classes.bold}>F°</Button>
             </ButtonGroup>
           </Grid>
           <Divider variant='middle' className={classes.divider} />

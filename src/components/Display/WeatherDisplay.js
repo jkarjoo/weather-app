@@ -1,16 +1,14 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-// import Button from '@material-ui/core/Button';
-// import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Divider from '@material-ui/core/Divider';
 import WeatherIcon from '../Icon/WeatherIcon';
-import water from '../../assets/water.svg';
 import wind from '../../assets/wind.svg';
 import classes from './WeatherDisplay.module.css';
 import WeatherControls from '../Controls/WeatherControls';
 import Location from '../Location/Location';
 import Temperature from '../Temperature/Temperature';
+import Humidity from '../Humidity/Humidity';
 
 function WeatherDisplay(props) {
   const {
@@ -97,9 +95,7 @@ function WeatherDisplay(props) {
           </Grid>
           <Divider variant='middle' className={classes.mainDivider} />
           <Grid item xs={6} className={classes.iconContainer}>
-            <img src={water} alt='' className={classes.icon}></img>
-            <h4>Humidity</h4>
-            <span>{humidity}%</span>
+            <Humidity humidity={humidity} />
           </Grid>
           <Grid item xs={6} className={classes.iconContainer}>
             <img src={wind} alt='' className={classes.icon}></img>

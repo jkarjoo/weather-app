@@ -63,6 +63,10 @@ class WeatherForecast extends Component {
       fetchWeather(this.state.searchInput);
     };
 
+    const changeUnit = (newUnit) => {
+      this.setState({ unit: newUnit });
+    };
+
     return (
       <Container maxWidth='sm' className={classes.root}>
         <SearchBar
@@ -70,7 +74,11 @@ class WeatherForecast extends Component {
           submitHandler={submitHandler}
           input={this.state.searchInput}
         />
-        <WeatherDisplay weather={this.state.weather} unit={this.state.unit} />
+        <WeatherDisplay
+          weather={this.state.weather}
+          unit={this.state.unit}
+          changeUnit={changeUnit}
+        />
       </Container>
     );
   }

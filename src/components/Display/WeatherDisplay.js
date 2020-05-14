@@ -1,13 +1,14 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+// import Button from '@material-ui/core/Button';
+// import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Divider from '@material-ui/core/Divider';
 import WeatherIcon from '../Icon/WeatherIcon';
 import water from '../../assets/water.svg';
 import wind from '../../assets/wind.svg';
 import classes from './WeatherDisplay.module.css';
+import WeatherControls from '../Controls/WeatherControls';
 
 function WeatherDisplay(props) {
   const {
@@ -26,6 +27,7 @@ function WeatherDisplay(props) {
       weatherID,
     },
     unit,
+    changeUnit,
   } = props;
 
   const convertTemp = (temp) => {
@@ -73,10 +75,7 @@ function WeatherDisplay(props) {
             </h4>
           </Grid>
           <Grid item xs={4} align='right' className={classes.topRightBar}>
-            <ButtonGroup variant='text' aria-label='text primary button group'>
-              <Button className={classes.bold}>C°</Button>
-              <Button className={classes.bold}>F°</Button>
-            </ButtonGroup>
+            <WeatherControls unit={unit} changeUnit={changeUnit} />
           </Grid>
           <Divider variant='middle' className={classes.divider} />
           <Grid item xs={8} className={classes.main}>

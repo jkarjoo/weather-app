@@ -10,6 +10,7 @@ import wind from '../../assets/wind.svg';
 import classes from './WeatherDisplay.module.css';
 import WeatherControls from '../Controls/WeatherControls';
 import Location from '../Location/Location';
+import Temperature from '../Temperature/Temperature';
 
 function WeatherDisplay(props) {
   const {
@@ -86,16 +87,13 @@ function WeatherDisplay(props) {
             </span>
           </Grid>
           <Grid item xs={4} className={classes.temp}>
-            <WeatherIcon></WeatherIcon>
-            <h1>
-              {convertTemp(temp)}°{unit}
-            </h1>
-            <span>
-              High: {convertTemp(highTemp)}°{unit}
-            </span>
-            <span>
-              Low: {convertTemp(lowTemp)}°{unit}
-            </span>
+            <WeatherIcon />
+            <Temperature
+              temp={convertTemp(temp)}
+              high={convertTemp(highTemp)}
+              low={convertTemp(lowTemp)}
+              unit={unit}
+            />
           </Grid>
           <Divider variant='middle' className={classes.mainDivider} />
           <Grid item xs={6} className={classes.iconContainer}>

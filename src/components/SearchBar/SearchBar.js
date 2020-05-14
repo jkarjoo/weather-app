@@ -6,14 +6,17 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import classes from './SearchBar.module.css';
 
-function SearchBar() {
+const SearchBar = (props) => {
+  const { inputHandler, submitHandler } = props;
   return (
-    <form>
+    <form onSubmit={(e) => submitHandler(e)}>
       <Paper className={classes.root}>
         <InputBase
           placeholder='Zip Code/City'
           autoFocus
           className={classes.input}
+          onChange={(e) => inputHandler(e.target.value)}
+          value={props.input}
         />
         <Divider orientation='vertical' className={classes.divider} />
         <IconButton type='submit'>
@@ -22,6 +25,6 @@ function SearchBar() {
       </Paper>
     </form>
   );
-}
+};
 
 export default SearchBar;

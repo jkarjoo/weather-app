@@ -9,6 +9,7 @@ import water from '../../assets/water.svg';
 import wind from '../../assets/wind.svg';
 import classes from './WeatherDisplay.module.css';
 import WeatherControls from '../Controls/WeatherControls';
+import Location from '../Location/Location';
 
 function WeatherDisplay(props) {
   const {
@@ -70,9 +71,7 @@ function WeatherDisplay(props) {
       <Paper>
         <Grid container>
           <Grid item xs={8} className={classes.topBar}>
-            <h4>
-              {city}, {country}
-            </h4>
+            <Location city={city} country={country} />
           </Grid>
           <Grid item xs={4} align='right' className={classes.topRightBar}>
             <WeatherControls unit={unit} changeUnit={changeUnit} />

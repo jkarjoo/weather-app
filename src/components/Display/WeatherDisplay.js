@@ -3,12 +3,13 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import WeatherIcon from '../Icon/WeatherIcon';
-import wind from '../../assets/wind.svg';
 import classes from './WeatherDisplay.module.css';
 import WeatherControls from '../Controls/WeatherControls';
 import Location from '../Location/Location';
 import Temperature from '../Temperature/Temperature';
 import Humidity from '../Humidity/Humidity';
+import Wind from '../Wind/Wind';
+import Description from '../Description/Description';
 
 function WeatherDisplay(props) {
   const {
@@ -79,10 +80,11 @@ function WeatherDisplay(props) {
           <Grid item xs={8} className={classes.main}>
             <h1>April 14th, 2020</h1>
             <h2>7:07 PM</h2>
-            <span>{weatherDescription}</span>
-            <span>
-              Feels like: {convertTemp(feelsLike)}°{unit}
-            </span>
+            <Description
+              descript={weatherDescription}
+              feelsLike={convertTemp(feelsLike)}
+              unit={unit}
+            />
           </Grid>
           <Grid item xs={4} className={classes.temp}>
             <WeatherIcon />
@@ -98,12 +100,10 @@ function WeatherDisplay(props) {
             <Humidity humidity={humidity} />
           </Grid>
           <Grid item xs={6} className={classes.iconContainer}>
-            <img src={wind} alt='' className={classes.icon}></img>
-            <h4>Wind</h4>
-            <span>
-              {convertWindSpeed(windSpeed)} mph{' '}
-              {convertWindDirection(windDegree)}
-            </span>
+            <Wind
+              speed={convertWindSpeed(windSpeed)}
+              direction={convertWindDirection(windDegree)}
+            />
           </Grid>
         </Grid>
       </Paper>

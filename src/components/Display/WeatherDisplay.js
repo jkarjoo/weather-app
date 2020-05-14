@@ -10,12 +10,67 @@ import wind from '../../assets/wind.svg';
 import classes from './WeatherDisplay.module.css';
 
 function WeatherDisplay(props) {
+  const {
+    weather: {
+      city,
+      country,
+      feelsLike,
+      temp,
+      highTemp,
+      lowTemp,
+      humidity,
+      weatherMain,
+      weatherDescription,
+      windDegree,
+      windSpeed,
+      weatherID,
+    },
+    unit,
+  } = props;
+
+  const convertTemp = (temp) => {
+    if (unit === 'C') {
+      return Math.round(temp - 273.15);
+    } else {
+      return Math.round(((temp - 273.15) * 9) / 5 + 32);
+    }
+  };
+
+  const convertWindSpeed = (speed) => {
+    return Math.round(speed * 2.236936);
+  };
+
+  const convertWindDirection = (speed) => {
+    const val = Math.round(speed / 22.5 + 0.5);
+    const arr = [
+      'N',
+      'NNE',
+      'NE',
+      'ENE',
+      'E',
+      'ESE',
+      'SE',
+      'SSE',
+      'S',
+      'SSW',
+      'SW',
+      'WSW',
+      'W',
+      'WNW',
+      'NW',
+      'NNW',
+    ];
+    return arr[val % 16];
+  };
+
   return (
     <div className={classes.root}>
       <Paper>
         <Grid container>
           <Grid item xs={8} className={classes.topBar}>
-            <h4>{props.input}</h4>
+            <h4>
+              {city}, {country}
+            </h4>
           </Grid>
           <Grid item xs={4} align='right' className={classes.topRightBar}>
             <ButtonGroup variant='text' aria-label='text primary button group'>
@@ -27,25 +82,36 @@ function WeatherDisplay(props) {
           <Grid item xs={8} className={classes.main}>
             <h1>April 14th, 2020</h1>
             <h2>7:07 PM</h2>
-            <span>Clear Sky</span>
-            <span>Feels like: 48° F</span>
+            <span>{weatherDescription}</span>
+            <span>
+              Feels like: {convertTemp(feelsLike)}°{unit}
+            </span>
           </Grid>
           <Grid item xs={4} className={classes.temp}>
             <WeatherIcon></WeatherIcon>
-            <h1>44°F</h1>
-            <span>High: 61°</span>
-            <span>Low: 23°</span>
+            <h1>
+              {convertTemp(temp)}°{unit}
+            </h1>
+            <span>
+              High: {convertTemp(highTemp)}°{unit}
+            </span>
+            <span>
+              Low: {convertTemp(lowTemp)}°{unit}
+            </span>
           </Grid>
           <Divider variant='middle' className={classes.mainDivider} />
           <Grid item xs={6} className={classes.iconContainer}>
             <img src={water} alt='' className={classes.icon}></img>
             <h4>Humidity</h4>
-            <span>72%</span>
+            <span>{humidity}%</span>
           </Grid>
           <Grid item xs={6} className={classes.iconContainer}>
             <img src={wind} alt='' className={classes.icon}></img>
             <h4>Wind</h4>
-            <span>7 km/h NW</span>
+            <span>
+              {convertWindSpeed(windSpeed)} mph{' '}
+              {convertWindDirection(windDegree)}
+            </span>
           </Grid>
         </Grid>
       </Paper>

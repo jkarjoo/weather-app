@@ -4,6 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import WeatherDisplay from '../Display/WeatherDisplay';
 import classes from './WeatherForecast.module.css';
 import ErrorMessage from '../Error/ErrorMessage';
+import Loading from '../Loading/Loading';
 
 class WeatherForecast extends Component {
   state = {
@@ -91,6 +92,7 @@ class WeatherForecast extends Component {
             changeUnitHandler={changeUnitHandler}
           />
         ) : null}
+        {this.state.loading ? <Loading /> : null}
         <ErrorMessage error={this.state.error} close={closeError} />
       </Container>
     );

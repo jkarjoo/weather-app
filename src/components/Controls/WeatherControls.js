@@ -6,10 +6,16 @@ import classes from './WeatherControls.module.css';
 const WeatherControls = (props) => {
   return (
     <ButtonGroup variant='text' aria-label='text primary button group'>
-      <Button className={classes.bold} onClick={() => props.changeUnit('C')}>
+      <Button
+        className={classes.bold}
+        onClick={() => props.changeUnitHandler('C')}
+      >
         C°
       </Button>
-      <Button className={classes.bold} onClick={() => props.changeUnit('F')}>
+      <Button
+        className={classes.bold}
+        onClick={() => props.changeUnitHandler('F')}
+      >
         F°
       </Button>
     </ButtonGroup>

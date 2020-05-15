@@ -23,6 +23,7 @@ class WeatherForecast extends Component {
       windDegree: '',
       windSpeed: '',
       weatherID: '',
+      timezone: '',
     },
   };
 
@@ -52,10 +53,10 @@ class WeatherForecast extends Component {
           weatherID: data.weather[0].id,
           windDegree: data.wind.deg,
           windSpeed: data.wind.speed,
+          timezone: data.timezone,
         },
       });
       this.setState({ dataLoaded: true, loading: false });
-      console.log(this.state);
     };
 
     const submitHandler = (e) => {
@@ -63,7 +64,7 @@ class WeatherForecast extends Component {
       fetchWeather(this.state.searchInput);
     };
 
-    const changeUnit = (newUnit) => {
+    const changeUnitHandler = (newUnit) => {
       this.setState({ unit: newUnit });
     };
 
@@ -74,11 +75,13 @@ class WeatherForecast extends Component {
           submitHandler={submitHandler}
           input={this.state.searchInput}
         />
-        <WeatherDisplay
-          weather={this.state.weather}
-          unit={this.state.unit}
-          changeUnit={changeUnit}
-        />
+        {this.state.dataLoaded ? (
+          <WeatherDisplay
+            weather={this.state.weather}
+            unit={this.state.unit}
+            changeUnitHandler={changeUnitHandler}
+          />
+        ) : null}
       </Container>
     );
   }

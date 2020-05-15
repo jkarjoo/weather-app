@@ -10,6 +10,7 @@ import Temperature from '../Temperature/Temperature';
 import Humidity from '../Humidity/Humidity';
 import Wind from '../Wind/Wind';
 import Description from '../Description/Description';
+import Clock from '../Clock/Clock';
 
 function WeatherDisplay(props) {
   const {
@@ -26,9 +27,10 @@ function WeatherDisplay(props) {
       windDegree,
       windSpeed,
       weatherID,
+      timezone,
     },
     unit,
-    changeUnit,
+    changeUnitHandler,
   } = props;
 
   const convertTemp = (temp) => {
@@ -74,12 +76,14 @@ function WeatherDisplay(props) {
             <Location city={city} country={country} />
           </Grid>
           <Grid item xs={4} align='right' className={classes.topRightBar}>
-            <WeatherControls unit={unit} changeUnit={changeUnit} />
+            <WeatherControls
+              unit={unit}
+              changeUnitHandler={changeUnitHandler}
+            />
           </Grid>
           <Divider variant='middle' className={classes.divider} />
           <Grid item xs={8} className={classes.main}>
-            <h1>April 14th, 2020</h1>
-            <h2>7:07 PM</h2>
+            <Clock timezone={timezone} />
             <Description
               descript={weatherDescription}
               feelsLike={convertTemp(feelsLike)}
@@ -87,7 +91,7 @@ function WeatherDisplay(props) {
             />
           </Grid>
           <Grid item xs={4} className={classes.temp}>
-            <WeatherIcon />
+            <WeatherIcon id={weatherID} />
             <Temperature
               temp={convertTemp(temp)}
               high={convertTemp(highTemp)}

@@ -6,7 +6,10 @@ class Clock extends Component {
     super(props);
     this.state = {
       timer: '',
-      date: moment().format('MMM Do, YYYY'),
+      date: moment()
+        .utc()
+        .utcOffset(this.props.timezone / 3600)
+        .format('MMM Do, YYYY'),
       time: moment()
         .utc()
         .utcOffset(this.props.timezone / 3600)
@@ -24,7 +27,10 @@ class Clock extends Component {
 
   updateTimer() {
     this.setState({
-      date: moment().format('MMM Do, YYYY'),
+      date: moment()
+        .utc()
+        .utcOffset(this.props.timezone / 3600)
+        .format('MMM Do, YYYY'),
       time: moment()
         .utc()
         .utcOffset(this.props.timezone / 3600)

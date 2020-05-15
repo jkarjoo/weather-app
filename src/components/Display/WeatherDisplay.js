@@ -22,7 +22,6 @@ function WeatherDisplay(props) {
       highTemp,
       lowTemp,
       humidity,
-      weatherMain,
       weatherDescription,
       windDegree,
       windSpeed,
@@ -76,10 +75,7 @@ function WeatherDisplay(props) {
             <Location city={city} country={country} />
           </Grid>
           <Grid item xs={4} align='right' className={classes.topRightBar}>
-            <WeatherControls
-              unit={unit}
-              changeUnitHandler={changeUnitHandler}
-            />
+            <WeatherControls unit={unit} changeUnitHandler={changeUnitHandler} />
           </Grid>
           <Divider variant='middle' className={classes.divider} />
           <Grid item xs={8} className={classes.main}>

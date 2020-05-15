@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import SearchBar from '../SearchBar/SearchBar';
 import WeatherDisplay from '../Display/WeatherDisplay';
 import classes from './WeatherForecast.module.css';
+import ErrorMessage from '../Error/ErrorMessage';
 
 class WeatherForecast extends Component {
   state = {
@@ -10,6 +11,7 @@ class WeatherForecast extends Component {
     loading: false,
     dataLoaded: false,
     unit: 'F',
+    error: false,
     weather: {
       city: '',
       country: '',
@@ -18,7 +20,6 @@ class WeatherForecast extends Component {
       highTemp: '',
       lowTemp: '',
       humidity: '',
-      weatherMain: '',
       weatherDescription: '',
       windDegree: '',
       windSpeed: '',
@@ -34,29 +35,33 @@ class WeatherForecast extends Component {
 
     const fetchWeather = async (input) => {
       this.setState({ dataLoaded: false, loading: true });
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=0a9172422d10d575215bede9fab1503e`,
-        { mode: 'cors' }
-      );
-      const data = await response.json();
-      this.setState({
-        weather: {
-          city: data.name,
-          country: data.sys.country,
-          feelsLike: data.main.feels_like,
-          temp: data.main.temp,
-          highTemp: data.main.temp_max,
-          lowTemp: data.main.temp_min,
-          humidity: data.main.humidity,
-          weatherMain: data.weather[0].main,
-          weatherDescription: data.weather[0].description,
-          weatherID: data.weather[0].id,
-          windDegree: data.wind.deg,
-          windSpeed: data.wind.speed,
-          timezone: data.timezone,
-        },
-      });
-      this.setState({ dataLoaded: true, loading: false });
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=0a9172422d10d575215bede9fab1503e`,
+          { mode: 'cors' }
+        );
+        const data = await response.json();
+        this.setState({
+          weather: {
+            city: data.name,
+            country: data.sys.country,
+            feelsLike: data.main.feels_like,
+            temp: data.main.temp,
+            highTemp: data.main.temp_max,
+            lowTemp: data.main.temp_min,
+            humidity: data.main.humidity,
+            weatherMain: data.weather[0].main,
+            weatherDescription: data.weather[0].description,
+            weatherID: data.weather[0].id,
+            windDegree: data.wind.deg,
+            windSpeed: data.wind.speed,
+            timezone: data.timezone,
+          },
+        });
+        this.setState({ dataLoaded: true, loading: false });
+      } catch (err) {
+        this.setState({ loading: false, error: true });
+      }
     };
 
     const submitHandler = (e) => {
@@ -66,6 +71,10 @@ class WeatherForecast extends Component {
 
     const changeUnitHandler = (newUnit) => {
       this.setState({ unit: newUnit });
+    };
+
+    const closeError = () => {
+      this.setState({ error: false });
     };
 
     return (
@@ -82,6 +91,7 @@ class WeatherForecast extends Component {
             changeUnitHandler={changeUnitHandler}
           />
         ) : null}
+        <ErrorMessage error={this.state.error} close={closeError} />
       </Container>
     );
   }

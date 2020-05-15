@@ -7,29 +7,55 @@ import rain from '../../assets/rain.svg';
 import snow from '../../assets/snow.svg';
 import storm from '../../assets/storm.svg';
 import sun from '../../assets/sun.svg';
+import clearnight from '../../assets/clearnight.svg';
+import nightsnow from '../../assets/nightsnow.svg';
+import nightstorm from '../../assets/nightstorm.svg';
 
 function WeatherIcon(props) {
   const weatherIconValues = [
-    [200, 201, 202, 210, 211, 212, 221, 230, 231, 232], // 11d storm
-    [300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531, 500, 501, 502, 503, 504], // 10d rain
-    [511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622], // 13d snow
-    [701, 711, 721, 731, 741, 751, 761, 762, 771, 781], // 50d mist
-    [800], // 01d / 01n sun
-    [801], // 02d / 02n partcloudy
-    [802, 803, 804], // 04d / 04n cloud
+    ['11d'], // storm
+    ['09d', '10d'], // rain
+    ['13d'], // snow
+    ['50d'], // mist
+    ['01d'], // clear sky
+    ['02d'], // partcloudy
+    ['03d', '04d'], // cloudy
+    ['01n', '02n', '03n', '04n', '50n'], // Night clear sky/partcloudy/cloudy/mist
+    ['09n', '10n'], // Night rain
+    ['11n'], // Night storm
+    ['13n'], // Night snow
   ];
 
-  const WeatherIconTypes = [storm, rain, snow, mist, sun, partcloudy, cloud];
+  const weatherIconTypes = [
+    storm,
+    rain,
+    snow,
+    mist,
+    sun,
+    partcloudy,
+    cloud,
+    clearnight,
+    rain,
+    nightstorm,
+    nightsnow,
+  ];
+
+  const classList = [classes.icon];
 
   const getIndex = (id) => {
     for (let i = 0; i < weatherIconValues.length; i++) {
       if (weatherIconValues[i].indexOf(id) !== -1) {
+        if (i !== 8 && i > 6) {
+          classList.push(classes.night);
+        }
         return i;
       }
     }
   };
 
-  return <img src={WeatherIconTypes[getIndex(props.id)]} alt='' className={classes.icon}></img>;
+  return (
+    <img src={weatherIconTypes[getIndex(props.id)]} alt='' className={classList.join(' ')}></img>
+  );
 }
 
 export default WeatherIcon;

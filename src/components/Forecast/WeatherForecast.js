@@ -53,7 +53,7 @@ class WeatherForecast extends Component {
             humidity: data.main.humidity,
             weatherMain: data.weather[0].main,
             weatherDescription: data.weather[0].description,
-            weatherID: data.weather[0].id,
+            weatherID: data.weather[0].icon,
             windDegree: data.wind.deg,
             windSpeed: data.wind.speed,
             timezone: data.timezone,

@@ -20,8 +20,8 @@ Here is the working live demo:
 
 ## Technologies
 
-- ReactJS
 - Javascript (ES6)
+- ReactJS
 - Material-UI
 - MomentJS
 - OpenWeatherMap API

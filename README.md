@@ -16,7 +16,7 @@ Enter a location to get the current date, time, and weather. Add the abbreviated
 ## Demo
 
 Here is the working live demo:
-[https://justinkar.github.io/weather-app/](https://justinkar.github.io/weather-app/).
+[https://jkarjoo.github.io/weather-app/](https://jkarjoo.github.io/weather-app/).
 
 ## Technologies
 
